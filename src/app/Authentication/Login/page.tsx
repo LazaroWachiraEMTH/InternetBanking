@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +23,9 @@ export default function Login() {
     setIsLoggingIn(true);
   };
 
+  const handleForgotPassword = () => {
+    router.push("/Authentication/Userpage");
+  };
   return (
     <div className="flex flex-col md:flex-row h-screen w-full bg-gray-100">
       <div className="md:w-1/2 h-1/3 md:h-full relative bg-[url('/assets/images/background-login-min.jpg')] bg-cover bg-center flex items-center justify-center">
@@ -108,7 +113,10 @@ export default function Login() {
           </button>
 
           <div className="text-center mt-4">
-            <a href="#" className="text-sm text-nfgold hover:nfgray">
+            <a
+              onClick={handleForgotPassword}
+              className="text-sm text-nfgold hover:nfgray cursor-pointer"
+            >
               Forgot password?
             </a>
           </div>
